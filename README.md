@@ -6,6 +6,8 @@ It matters most for Poas that aren't on GitHub Pages (Codeberg Pages, your own h
 
 The list is [`poas.md`](poas.md). Anyone can propose a change; a maintainer merges it.
 
+**Browse it at [gearnoodle.github.io/poa-directory](https://gearnoodle.github.io/poa-directory/).** The page opens every listed Poa live and shows its name, category and latest post, with category filters and a "random Poa" button. Poas that say `search: no` aren't shown, and Poas that don't answer are listed separately as unreachable. Nothing is copied or kept.
+
 ## Add your Poa
 
 1. Open [`poas.md`](poas.md) and click the pencil (✎) to edit it. GitHub makes a copy for you if you need one.
@@ -49,6 +51,8 @@ For anyone writing a reader or a crawler:
 Nothing about this list is special. Copy the repository, and point a reader at your copy by changing `DIRECTORY` at the top of the script in its `index.html`.
 
 ## For maintainers
+
+- `index.html` is the browsing page, served by GitHub Pages from `main` (Settings → Pages → Deploy from a branch → `main`, `/ (root)`). `.nojekyll` keeps `poas.md` served as it is.
 
 - `.github/workflows/check.yml` runs `scripts/check-poas.mjs` on every pull request that changes `poas.md`. It checks the list's format and duplicates, and opens each **new** address: `poa.md` must answer over HTTPS, have a `version`, and not say `search: no`. A missing `Access-Control-Allow-Origin: *` header is a warning, since such a Poa works for crawlers but not web readers.
 - Run the workflow by hand (**Actions → Check poas.md → Run workflow**) to check every address in the list.
