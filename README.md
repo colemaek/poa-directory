@@ -10,16 +10,23 @@ The list is [`poas.md`](poas.md). Anyone can propose a change; a maintainer merg
 
 ## Add your Poa
 
-1. Open [`poas.md`](poas.md) and click the pencil (✎) to edit it. GitHub makes a copy for you if you need one.
-2. Add a line at the bottom of the list with your Poa's address:
+You need a free [GitHub account](https://github.com/signup). Sign in first, then:
+
+1. **Open the list for editing:** [github.com/gearnoodle/poa-directory/edit/main/poas.md](https://github.com/gearnoodle/poa-directory/edit/main/poas.md).
+2. **Fork the repository.** GitHub says *"You need to fork this repository to propose changes."* That's expected: click the green **Fork this repository** button. It makes your own copy of the list, which is how you suggest a change to someone else's repository. You can delete the copy once you're listed.
+3. **Add your line.** The editor opens with the list. Go to the very end and add a new line with a dash, a space and your Poa's address:
 
    ```markdown
    - yourname.codeberg.page/poa
    ```
 
-3. Click **Commit changes…**, then **Propose changes**, then **Create pull request**.
+   Change nothing else in the file.
+4. **Save it as a proposal.** Click the green **Commit changes…** button at the top right. A box opens; click **Propose changes** at the bottom of it.
+5. **Send it.** A page titled *Comparing changes* opens. Click **Create pull request**, and on the next page click **Create pull request** again.
 
-An automatic check then opens your Poa and reports any problem on the pull request. Once it passes, a maintainer merges it, and readers pick you up the next time they search.
+That's it. An automatic check then opens your Poa and shows the result on your pull request after a minute or two (the first time, it may wait for a maintainer to let it run). A green tick means all is well, and a maintainer will merge it. A red cross means something needs fixing: click **Details** to see what. Fix it on your Poa, then leave a comment on the pull request and a maintainer will run the check again.
+
+Once merged, you show up on [the directory page](https://gearnoodle.github.io/poa-directory/), and Poa readers find you the next time they search "Everywhere".
 
 **Your address** is the folder that holds your `poa.md`, without `https://` and without `/poa.md`, for example `marta.github.io/poa` or `example.com/poa`.
 
@@ -32,7 +39,7 @@ An automatic check then opens your Poa and reports any problem on the pull reque
 
 ## Remove your Poa
 
-Delete your line from `poas.md` the same way and propose the change. If you can't, open an issue and a maintainer will remove it. Removing `index.html`'s discovery lines or adding `search: no` to your `poa.md` also keeps you out of search results, whether you're listed here or not.
+Delete your line from `poas.md` with the same steps (open the list for editing, remove your line, propose the change). If you can't, open an issue and a maintainer will remove it. Removing `index.html`'s discovery lines or adding `search: no` to your `poa.md` also keeps you out of search results, whether you're listed here or not.
 
 Poas that stay offline for a long time may be removed by a maintainer. Readers already skip any Poa they can't reach, so nothing breaks in the meantime.
 
@@ -56,4 +63,5 @@ Nothing about this list is special. Copy the repository, and point a reader at y
 
 - `.github/workflows/check.yml` runs `scripts/check-poas.mjs` on every pull request that changes `poas.md`. It checks the list's format and duplicates, and opens each **new** address: `poa.md` must answer over HTTPS, have a `version`, and not say `search: no`. A missing `Access-Control-Allow-Origin: *` header is a warning, since such a Poa works for crawlers but not web readers.
 - Run the workflow by hand (**Actions → Check poas.md → Run workflow**) to check every address in the list.
-- The check needs no secrets and runs with read-only permissions, so pull requests from forks are safe to check.
+- The check needs no secrets and runs with read-only permissions, so pull requests from forks are safe to check. GitHub holds workflows from first-time contributors until a maintainer clicks **Approve and run** on the pull request, so look out for that.
+- To re-run the check after someone fixes their Poa: on the pull request, **Checks → Re-run jobs**.
