@@ -1,0 +1,31 @@
+name: Check poas.md
+
+on:
+  pull_request:
+    paths: [poas.md]
+  workflow_dispatch: # run by hand to check every address in the list
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check new addresses
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ -n "$BASE_REF" ]; then
+            git show "origin/$BASE_REF:poas.md" > "$RUNNER_TEMP/base-poas.md" 2>/dev/null || : > "$RUNNER_TEMP/base-poas.md"
+            node scripts/check-poas.mjs poas.md "$RUNNER_TEMP/base-poas.md"
+          else
+            node scripts/check-poas.mjs poas.md
+          fi
